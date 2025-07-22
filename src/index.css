@@ -1,0 +1,95 @@
+@import "tailwindcss";
+
+@layer utilities {
+  .bg-animated-gradient {
+    background: linear-gradient(-45deg, #1a112e, #10194a, #111827, #000000);
+    background-size: 400% 400%;
+    animation: gradient-shift 12s ease infinite;
+  }
+
+  /* Contenitore delle figure animate */
+  .animated-bg {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    background: transparent;
+  }
+
+  .animated-bg::before,
+  .animated-bg::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05);
+    animation: move 20s linear infinite;
+  }
+
+  .animated-bg::before {
+    width: 700px;
+    height: 500px;
+    top: 50px;
+    left: 50px;
+  }
+
+  .animated-bg::after {
+    width: 200px;
+    height: 400px;
+    bottom: 50px;
+    right: 50px;
+  }
+
+  @keyframes move {
+    0% {
+      transform: translate(0, 0) rotate(0deg);
+    }
+    50% {
+      transform: translate(50px, 50px) rotate(180deg);
+    }
+    100% {
+      transform: translate(0, 0) rotate(360deg);
+    }
+  }
+
+  @keyframes gradient-shift {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  /* Animazione di entrata da sinistra */
+  @keyframes fade-in-left {
+    0% {
+      opacity: 0;
+      transform: translateX(-50px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  .animate-fade-in-left {
+    animation: fade-in-left 1s ease-out forwards;
+  }
+
+  @keyframes fade-in-up {
+    0% {
+      opacity: 0;
+      transform: translateY(50px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in-up {
+    animation: fade-in-up 1s ease-out forwards;
+  }
+}
