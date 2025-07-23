@@ -2,31 +2,31 @@ import { FaCode, FaPaintBrush, FaBookmark } from 'react-icons/fa';
 // eslint-disable-next-line no-unused-vars
 import { motion } from 'framer-motion';
 import { infoCardVariants, infoContainerVariants } from '../animation/variants';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function Features() {
+  const { t } = useLanguage();
+
   const features = [
     {
       id: 1,
       icon: <FaCode size={30} />,
-      title: "Developer",
-      description:
-        "Mi dedico allo sviluppo di soluzioni software su misura, combinando competenze tecniche aggiornate e una profonda attenzione alla qualità del codice. Ogni progetto è per me un’opportunità per creare applicazioni efficienti, scalabili e intuitive, capaci di rispondere alle esigenze specifiche dei clienti e di adattarsi all’evoluzione tecnologica.",
+      title: t.title1,
+      description: t.info1,
       highlighted: false,
     },
     {
       id: 2,
       icon: <FaPaintBrush size={30} />,
-      title: "Design Creativo",
-      description:
-        "Credo nel potere della creatività come motore dell’innovazione. Attraverso un approccio multidisciplinare, esploro nuove forme di design e sperimento soluzioni visive uniche, capaci di comunicare emozioni e valori. Ogni progetto creativo è per me una sfida per dare forma a idee originali, combinando estetica e funzionalità in modo armonioso.",
+      title: t.title2,
+      description: t.info2,
       highlighted: true,
     },
     {
       id: 3,
       icon: <FaBookmark size={30} />,
-      title: "Qualità",
-      description:
-        "Per me la qualità è un valore imprescindibile, che si riflette in ogni fase del lavoro. Mi impegno a garantire elevati standard di precisione, cura del dettaglio e affidabilità, affinché ogni progetto raggiunga l’eccellenza tecnica e soddisfi appieno le aspettative. La qualità non è solo un obiettivo, ma una vera filosofia professionale.",
+      title: t.title3,
+      description: t.info3,
       highlighted: false,
     },
   ];

@@ -1,19 +1,22 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-scroll";
+import { useLanguage } from "../context/LanguageContext";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const { t } = useLanguage();
 
+  // NavLinks con traduzioni dinamiche
   const navLinks = [
-    { name: "Home", to: "home" },
-    { name: "Info", to: "feature" },
-    { name: "About", to: "about" },
-    { name: "Stack", to: "stacks" },
-    { name: "Progetti", to: "projects" },
+    { name: t.home, to: "home" },
+    { name: t.info, to: "feature" }, // Se vuoi 'Info' devi aggiungere traduzione in t
+    { name: t.about, to: "about" },  // usa 'about' invece di 'Info'
+    { name: t.stack, to: "stacks" },
+    { name: t.projects, to: "projects" },
   ];
 
-  // Effetto per rilevare lo scroll
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 10);
@@ -32,7 +35,7 @@ export default function Navbar() {
         <div className="text-2xl font-bold cursor-pointer">
           <Link to="home" smooth={true} duration={500} offset={-60}>
             Alfio &nbsp;
-            <span className="block lg:inline"> | Fullstack Developer</span>
+            <span className="block lg:inline"> | {t.profession}</span>
           </Link>
         </div>
 
@@ -57,6 +60,9 @@ export default function Navbar() {
               </li>
             ))}
           </ul>
+
+          {/* Language Switcher Desktop */}
+          <LanguageSwitcher />
         </div>
 
         {/* Mobile Menu Button */}
@@ -100,28 +106,33 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <ul
-          className="md:hidden text-center py-4 space-y-4 text-lg text-gray-200 bg-gray-900/90 backdrop-blur-md"
-        >
-          {navLinks.map((link, index) => (
-            <li
-              key={index}
-              className="cursor-pointer hover:text-cyan-400 transition-colors"
-            >
-              <Link
-                to={link.to}
-                smooth={true}
-                duration={500}
-                offset={-60}
-                spy={true}
-                activeClass="text-cyan-400 font-semibold bg-black/20 backdrop-blur-md"
-                onClick={() => setIsOpen(false)}
+        <div className="md:hidden bg-gray-900/90 backdrop-blur-md py-4 text-center">
+          <ul className="space-y-4 text-lg text-gray-200">
+            {navLinks.map((link, index) => (
+              <li
+                key={index}
+                className="cursor-pointer hover:text-cyan-400 transition-colors"
               >
-                {link.name}
-              </Link>
-            </li>
-          ))}
-        </ul>
+                <Link
+                  to={link.to}
+                  smooth={true}
+                  duration={500}
+                  offset={-60}
+                  spy={true}
+                  activeClass="text-cyan-400 font-semibold bg-black/20 backdrop-blur-md"
+                  onClick={() => setIsOpen(false)}
+                >
+                  {link.name}
+                </Link>
+              </li>
+            ))}
+          </ul>
+
+          {/* Language Switcher Mobile */}
+          <div className="mt-4 flex justify-center">
+            <LanguageSwitcher />
+          </div>
+        </div>
       )}
     </nav>
   );

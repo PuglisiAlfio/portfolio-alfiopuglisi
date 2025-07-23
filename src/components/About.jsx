@@ -1,10 +1,12 @@
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 import { sectionFromLeft, fadeUpChild } from "../animation/variants.js";
-
-import meditatingImg from "../assets/images/meditating.svg"
+import meditatingImg from "../assets/images/meditating.svg";
+import { useLanguage } from "../context/LanguageContext";
 
 export default function About() {
+  const { t } = useLanguage();
+
   return (
     <motion.section
       id="about"
@@ -14,7 +16,7 @@ export default function About() {
       whileInView="visible"
       viewport={{ once: true, amount: 0.2 }}
     >
-        <div className="absolute inset-0 animated-bg pointer-events-none"></div>
+      <div className="absolute inset-0 animated-bg pointer-events-none"></div>
       <div className="flex flex-col md:flex-row items-center justify-center w-full gap-8">
 
         {/* Colonna sinistra */}
@@ -34,17 +36,13 @@ export default function About() {
             variants={fadeUpChild}
             className="text-4xl md:text-5xl font-bold mb-4"
           >
-            Chi sono
+            {t.aboutTitle}
           </motion.h2>
           <motion.p
             variants={fadeUpChild}
             className="text-lg md:text-xl leading-relaxed"
           >
-            Dopo diverse esperienze come bagnino, elettricista e idraulico, durante
-            il lockdown ho scoperto una nuova passione: lo sviluppo web. Da quel
-            momento mi sono immerso in questo settore in continua evoluzione,
-            studiando e sperimentando per trasformare la mia curiosità in
-            competenza e per costruire progetti di cui essere orgoglioso.
+            {t.aboutDescription}
           </motion.p>
         </motion.div>
       </div>

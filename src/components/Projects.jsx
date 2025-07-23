@@ -1,10 +1,12 @@
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 import { PROJECTS } from "../data/projects";
-
 import { projectsContainer, projectItem } from "../animation/variants";
+import { useLanguage } from "../context/LanguageContext";
 
 export default function Projects() {
+  const { t } = useLanguage();
+
   return (
     <motion.section
       id="projects"
@@ -19,7 +21,7 @@ export default function Projects() {
         variants={projectItem}
         className="text-4xl md:text-5xl font-bold text-gray-200 mb-4"
       >
-        Progetti
+        {t.projectsTitle}
       </motion.h2>
 
       {/* Descrizione breve */}
@@ -27,8 +29,7 @@ export default function Projects() {
         variants={projectItem}
         className="text-gray-300 text-center max-w-2xl mb-10 text-lg"
       >
-        Una selezione dei progetti su cui ho lavorato: codice reale, problemi
-        risolti e crescita continua.
+        {t.projectsDescription}
       </motion.p>
 
       {/* Griglia progetti */}
@@ -36,57 +37,60 @@ export default function Projects() {
         variants={projectsContainer}
         className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 w-full max-w-7xl"
       >
-        {PROJECTS.map((proj) => (
-          <motion.li
-            key={proj.id}
-            variants={projectItem}
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.98 }}
-            className="
-              group
-              bg-black/30 backdrop-blur-md
-              rounded-2xl
-              border border-cyan-400/20
-              hover:border-cyan-400/60
-              overflow-hidden
-              transition-all duration-200
-              shadow-[0_0_0_rgba(0,0,0,0)]
-              hover:shadow-[0_0_20px_rgba(34,211,238,0.4)]
-            "
-          >
-            <a
-              href={proj.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={`Apri ${proj.title} su GitHub`}
-              className="flex flex-col h-full"
+        {PROJECTS.map((proj) => {
+          const localized = t.projectsComponent[proj.id];
+          return (
+            <motion.li
+              key={proj.id}
+              variants={projectItem}
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.98 }}
+              className="
+                group
+                bg-black/30 backdrop-blur-md
+                rounded-2xl
+                border border-cyan-400/20
+                hover:border-cyan-400/60
+                overflow-hidden
+                transition-all duration-200
+                shadow-[0_0_0_rgba(0,0,0,0)]
+                hover:shadow-[0_0_20px_rgba(34,211,238,0.4)]
+              "
             >
-              {/* Immagine */}
-              {proj.image ? (
-                <img
-                  src={proj.image}
-                  alt={proj.title}
-                  className="w-full aspect-video object-cover"
-                  loading="lazy"
-                />
-              ) : (
-                <div className="w-full aspect-video flex items-center justify-center text-gray-500 text-sm bg-black/40">
-                  No image
-                </div>
-              )}
+              <a
+                href={proj.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Apri ${localized.title} su GitHub`}
+                className="flex flex-col h-full"
+              >
+                {/* Immagine */}
+                {proj.image ? (
+                  <img
+                    src={proj.image}
+                    alt={localized.title}
+                    className="w-full aspect-video object-cover"
+                    loading="lazy"
+                  />
+                ) : (
+                  <div className="w-full aspect-video flex items-center justify-center text-gray-500 text-sm bg-black/40">
+                    No image
+                  </div>
+                )}
 
-              {/* Corpo card */}
-              <div className="p-6 flex flex-col flex-1 text-left">
-                <h3 className="text-xl font-semibold text-white mb-2 group-hover:text-cyan-300">
-                  {proj.title}
-                </h3>
-                <p className="text-gray-300 text-sm flex-1">
-                  {proj.description}
-                </p>
-              </div>
-            </a>
-          </motion.li>
-        ))}
+                {/* Corpo card */}
+                <div className="p-6 flex flex-col flex-1 text-left">
+                  <h3 className="text-xl font-semibold text-white mb-2 group-hover:text-cyan-300">
+                    {localized.title}
+                  </h3>
+                  <p className="text-gray-300 text-sm flex-1">
+                    {localized.description}
+                  </p>
+                </div>
+              </a>
+            </motion.li>
+          );
+        })}
       </motion.ul>
     </motion.section>
   );

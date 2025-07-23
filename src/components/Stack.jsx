@@ -2,6 +2,7 @@ import { useState } from "react";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 import { TECH_STACK } from "../data/techStacks.js";
+import { useLanguage } from "../context/LanguageContext";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -18,6 +19,7 @@ const itemVariants = {
 
 export default function Stack() {
   const [filter, setFilter] = useState("all");
+  const { t } = useLanguage();
 
   const filteredStack = TECH_STACK.filter((tech) =>
     filter === "all" ? true : tech.category?.includes(filter)
@@ -38,29 +40,27 @@ export default function Stack() {
           className="w-full md:w-1/2 p-6 backdrop-blur-md bg-black/20 rounded-xl"
         >
           <h2 className="text-4xl md:text-5xl font-bold text-gray-100 mb-4">
-            Stack Tecnologico
+            {t.stackTitle}
           </h2>
           <p className="text-gray-300 leading-relaxed text-lg mb-6">
-            Durante il mio percorso da sviluppatore ho acquisito competenze su
-            una vasta gamma di tecnologie, sia frontend che backend. Grazie alla
-            mia curiosità e alla voglia di sperimentare, continuo ad ampliare il
-            mio stack per offrire soluzioni sempre più moderne, performanti e
-            user-friendly.
+            {t.stackDescription}
           </p>
           <div className="flex gap-3">
-            {["all", "frontend", "backend"].map((cat) => (
+            {[
+              { key: "all", label: t.filterAll },
+              { key: "frontend", label: t.filterFrontend },
+              { key: "backend", label: t.filterBackend },
+            ].map(({ key, label }) => (
               <button
-                key={cat}
-                onClick={() => setFilter(cat)}
+                key={key}
+                onClick={() => setFilter(key)}
                 className={`px-4 py-2 rounded-lg transition-colors ${
-                  filter === cat
+                  filter === key
                     ? "bg-cyan-500 text-black"
                     : "bg-gray-800 text-gray-300 hover:bg-cyan-400 hover:text-black"
                 }`}
               >
-                {cat === "all"
-                  ? "Tutti"
-                  : cat.charAt(0).toUpperCase() + cat.slice(1)}
+                {label}
               </button>
             ))}
           </div>
@@ -68,11 +68,11 @@ export default function Stack() {
 
         {/* COLONNA DESTRA (IMMAGINI STACK) */}
         <motion.div
-          key={filter} // <--- AGGIUNTO
+          key={filter}
           className="w-full md:w-1/2 grid grid-cols-3 sm:grid-cols-4 gap-6 p-6 backdrop-blur-md bg-black/10 rounded-xl"
           variants={containerVariants}
           initial="hidden"
-          animate="visible" // <--- usa animate invece di whileInView
+          animate="visible"
         >
           {filteredStack.map((tech) => (
             <motion.a

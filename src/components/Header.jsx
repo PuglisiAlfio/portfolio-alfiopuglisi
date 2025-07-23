@@ -1,6 +1,9 @@
+import { useLanguage } from "../context/LanguageContext";
 import headerImg from "../assets/images/building-a-website.svg";
 
 export default function Header() {
+  const { t } = useLanguage();
+
   return (
     <header className="relative h-screen w-full flex items-center overflow-hidden">
       {/* Sfondo animato */}
@@ -11,12 +14,11 @@ export default function Header() {
         {/* Sezione Testo */}
         <div className="text-left max-w-xl">
           <h1 className="text-4xl md:text-5xl font-extrabold text-gray-200 leading-tight">
-            Sono Alfio Puglisi <span className="block lg:inline"> | Fullstack Developer</span>
+            Alfio Puglisi{" "}
+            <span className="block lg:inline"> | {t.profession}</span>
           </h1>
           <p className="mt-6 text-lg md:text-xl text-gray-200">
-            Scopri come trasformo idee in soluzioni digitali efficaci e moderne.
-            Esplora i miei progetti, competenze e contatti per collaborare
-            insieme e creare il futuro del web.
+            {t.teckDescription}
           </p>
         </div>
 

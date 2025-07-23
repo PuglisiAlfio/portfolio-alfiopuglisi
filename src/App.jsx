@@ -6,6 +6,7 @@ import Stack from "./components/Stack.jsx";
 import Projects from "./components/Projects.jsx";
 import Footer from "./components/Footer.jsx";
 
+
 function App() {
   return (
     <div className="bg-animated-gradient min-h-screen">

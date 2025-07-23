@@ -1,6 +1,8 @@
 import { FaGithub, FaLinkedin, FaInstagram, FaFacebook } from 'react-icons/fa';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function Footer() {
+  const {t} = useLanguage()
   return (
     <footer className="bg-gray-900 text-gray-300 py-10 mt-10 border-t border-gray-700">
       <div className="container mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -8,13 +10,13 @@ export default function Footer() {
         <div>
           <h2 className="text-2xl font-bold text-cyan-400">Alfio Dev</h2>
           <p className="mt-2 text-gray-400 text-sm">
-            Sviluppatore Full Stack | Creazione di soluzioni web moderne e performanti.
+            {t.profession} | {t.motto}
           </p>
         </div>
 
         {/* Colonna 2 - Contatti */}
         <div>
-          <h3 className="text-lg font-semibold text-white">Contatti</h3>
+          <h3 className="text-lg font-semibold text-white">{t.contact}</h3>
           <ul className="mt-3 space-y-2 text-sm">
             <li>
               <a
@@ -38,7 +40,7 @@ export default function Footer() {
 
         {/* Colonna 3 - Social */}
         <div>
-          <h3 className="text-lg font-semibold text-white">Seguimi</h3>
+          <h3 className="text-lg font-semibold text-white">{t.follow}</h3>
           <div className="mt-3 flex gap-6 text-2xl text-gray-300">
             <a
               href="https://github.com/PuglisiAlfio"
