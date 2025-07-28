@@ -45,7 +45,7 @@ export default function Navbar() {
             {navLinks.map((link, index) => (
               <li
                 key={index}
-                className="cursor-pointer hover:text-cyan-400 transition-colors"
+                className="cursor-pointer hover:text-cyan-400 transition-colors whitespace-nowrap"
               >
                 <Link
                   to={link.to}
