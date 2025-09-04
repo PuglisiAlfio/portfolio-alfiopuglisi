@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { PROJECTS } from "../data/projects";
 import { projectsContainer, projectItem } from "../animation/variants";
 import { useLanguage } from "../context/LanguageContext";
+import { FaDatabase } from "react-icons/fa"; // fallback icona
 
 export default function Projects() {
   const { t } = useLanguage();
@@ -64,7 +65,7 @@ export default function Projects() {
                 aria-label={`Apri ${localized.title} su GitHub`}
                 className="flex flex-col h-full"
               >
-                {/* Immagine */}
+                {/* Immagine o fallback */}
                 {proj.image ? (
                   <img
                     src={proj.image}
@@ -73,8 +74,8 @@ export default function Projects() {
                     loading="lazy"
                   />
                 ) : (
-                  <div className="w-full aspect-video flex items-center justify-center text-gray-500 text-sm bg-black/40">
-                    No image
+                  <div className="w-full aspect-video flex items-center justify-center bg-black/40 text-cyan-400 text-4xl">
+                    <FaDatabase />
                   </div>
                 )}
 

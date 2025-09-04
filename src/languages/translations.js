@@ -36,6 +36,10 @@ export const translations = {
         title: "Tennis Tracker",
         description: "Segna. Vinci. Ricorda.",
       },
+      rubricaPython: {
+        title: "Rubrica in Python",
+        description: "Applicazione backend per gestire una rubrica di contatti.",
+      },
     },
     motto: "Creazione di soluzioni web moderne e performanti.",
     contact: "Contattami",
@@ -77,6 +81,10 @@ export const translations = {
       tennistracker: {
         title: "Tennis Tracker",
         description: "Score. Win. Remember.",
+      },
+      rubricaPython: {
+        title: "Python Phonebook",
+        description: "A backend app to manage a simple contact phonebook.",
       },
     },
     motto: "Creation of modern and high-performance web solutions.",
