@@ -40,6 +40,10 @@ export const translations = {
         title: "Rubrica in Python",
         description: "Applicazione backend per gestire una rubrica di contatti.",
       },
+      stockify: {
+        title: "Stockify",
+        description: "Applicazione per prenotazioni e gestione magazzino di materiali idraulici ed elettrici.",
+      },
     },
     motto: "Creazione di soluzioni web moderne e performanti.",
     contact: "Contattami",
@@ -85,6 +89,10 @@ export const translations = {
       rubricaPython: {
         title: "Python Phonebook",
         description: "A backend app to manage a simple contact phonebook.",
+      },
+      stockify: {
+        title: "Stockify",
+        description: "Application for booking and warehouse management of plumbing and electrical materials.",
       },
     },
     motto: "Creation of modern and high-performance web solutions.",
