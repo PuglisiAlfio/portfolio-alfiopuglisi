@@ -1,5 +1,5 @@
 import { useLanguage } from "../context/LanguageContext";
-import headerImg from "../assets/images/building-a-website.svg";
+import headerImg from "../assets/images/Io.png";
 
 export default function Header() {
   const { t } = useLanguage();
@@ -23,11 +23,11 @@ export default function Header() {
         </div>
 
         {/* Sezione immagine */}
-        <div className="mt-10 md:mt-0 flex justify-center md:justify-end w-full md:w-1/2">
+        <div className="mt-10 md:mt-0 flex justify-center w-full md:w-1/2">
           <img
             src={headerImg}
             alt="Building a website illustration"
-            className="w-full max-w-md md:max-w-lg h-auto"
+            className="w-full max-w-sm sm:max-w-md md:max-w-xl lg:max-w-2xl h-auto"
           />
         </div>
       </div>
