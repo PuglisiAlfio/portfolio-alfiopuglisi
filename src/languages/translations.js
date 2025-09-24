@@ -1,6 +1,7 @@
 export const translations = {
   it: {
     home: "Home",
+    name: "Alfio Puglisi",
     info: "Info",
     about: "Chi Sono",
     stack: "Stack",
@@ -51,6 +52,7 @@ export const translations = {
   },
   en: {
     home: "Home",
+    name: "Alfio Puglisi",
     info: "Info",
     about: "About",
     stack: "Stack",
