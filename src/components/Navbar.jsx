@@ -11,8 +11,8 @@ export default function Navbar() {
   // NavLinks con traduzioni dinamiche
   const navLinks = [
     { name: t.home, to: "home" },
-    { name: t.info, to: "feature" }, // Se vuoi 'Info' devi aggiungere traduzione in t
-    { name: t.about, to: "about" },  // usa 'about' invece di 'Info'
+    { name: t.info, to: "feature" },
+    { name: t.about, to: "about" },
     { name: t.stack, to: "stacks" },
     { name: t.projects, to: "projects" },
   ];
@@ -30,10 +30,11 @@ export default function Navbar() {
     <nav
       className={`fixed top-0 left-0 w-full z-50 shadow-md transition-colors duration-300
       ${scrolled ? "bg-gray-900/90 backdrop-blur-md" : "bg-transparent"}`}
+      aria-label="Main navigation"
     >
       <div className="container mx-auto flex justify-between items-center px-4 py-3 text-gray-200">
         <div className="text-2xl font-bold cursor-pointer">
-          <Link to="home" smooth={true} duration={500} offset={-60}>
+          <Link to="home" smooth={true} duration={500} offset={-60} aria-label="Torna alla sezione Home">
             Alfio &nbsp;
             <span className="block lg:inline"> | {t.profession}</span>
           </Link>
@@ -53,6 +54,7 @@ export default function Navbar() {
                   duration={500}
                   offset={-60}
                   spy={true}
+                  aria-label={`Vai alla sezione ${link.name}`}
                   activeClass="text-cyan-400 font-semibold bg-black/10 rounded-xl shadow-[5px_0_5px_cyan,-5px_0_5px_cyan] h-auto px-3 py-2"
                 >
                   {link.name}
@@ -69,6 +71,9 @@ export default function Navbar() {
         <div
           className="md:hidden cursor-pointer text-gray-200"
           onClick={() => setIsOpen(!isOpen)}
+          role="button"
+          aria-label={isOpen ? "Chiudi menu" : "Apri menu"}
+          aria-expanded={isOpen}
         >
           {isOpen ? (
             <svg
