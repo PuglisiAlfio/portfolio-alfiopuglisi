@@ -2,13 +2,13 @@ import { useState, useEffect } from "react";
 import { Link } from "react-scroll";
 import { useLanguage } from "../context/LanguageContext";
 import LanguageSwitcher from "./LanguageSwitcher";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const { t } = useLanguage();
 
-  // NavLinks con traduzioni dinamiche
   const navLinks = [
     { name: t.home, to: "home" },
     { name: t.info, to: "feature" },
@@ -18,127 +18,105 @@ export default function Navbar() {
   ];
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 10);
-    };
-
+    const handleScroll = () => setScrolled(window.scrollY > 12);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
     <nav
-      className={`fixed top-0 left-0 w-full z-50 shadow-md transition-colors duration-300
-      ${scrolled ? "bg-gray-900/90 backdrop-blur-md" : "bg-transparent"}`}
+      className={`fixed top-0 left-0 w-full z-[60] transition-colors duration-300
+      ${scrolled ? "bg-black/60 backdrop-blur-xl border-b border-cyan-200/10 shadow-lg" : "bg-transparent border-none shadow-none"}`}
       aria-label="Main navigation"
     >
-      <div className="container mx-auto flex justify-between items-center px-4 py-3 text-gray-200">
-        <div className="text-2xl font-bold cursor-pointer">
-          <Link to="home" smooth={true} duration={500} offset={-60} aria-label="Torna alla sezione Home">
-            Alfio &nbsp;
-            <span className="block lg:inline"> | {t.profession}</span>
+      <div className="container mx-auto flex justify-between items-center px-4 py-[1.1rem] text-cyan-100">
+        {/* Logo/Brand */}
+        <div className="text-2xl md:text-3xl font-extrabold tracking-tight cursor-pointer select-none drop-shadow">
+          <Link to="home" smooth={true} duration={600} offset={-68} aria-label="Home">
+            <span className="text-cyan-400">Alfio</span>
+            <span className="hidden lg:inline-block">&nbsp;|&nbsp;{t.profession}</span>
           </Link>
         </div>
 
         {/* Desktop Menu */}
-        <div className="hidden md:flex items-center gap-6">
-          <ul className="flex gap-8 text-lg">
-            {navLinks.map((link, index) => (
-              <li
-                key={index}
-                className="cursor-pointer hover:text-cyan-400 transition-colors whitespace-nowrap"
-              >
+        <div className="hidden md:flex items-center gap-8">
+          <ul className="flex gap-7 text-lg">
+            {navLinks.map((link, idx) => (
+              <li key={idx}>
                 <Link
                   to={link.to}
                   smooth={true}
                   duration={500}
-                  offset={-60}
+                  offset={-70}
                   spy={true}
                   aria-label={`Vai alla sezione ${link.name}`}
-                  activeClass="text-cyan-400 font-semibold bg-black/10 rounded-xl shadow-[5px_0_5px_cyan,-5px_0_5px_cyan] h-auto px-3 py-2"
+                  activeClass="!text-cyan-400 !font-bold border-b-2 border-cyan-400"
+                  className="relative cursor-pointer transition-colors hover:text-cyan-300 px-2 py-1"
                 >
-                  {link.name}
+                  <span className="transition-colors">{link.name}</span>
+                  {/* Underline animata */}
+                  <span className="absolute left-0 bottom-0 w-0 h-[2px] bg-cyan-400 group-hover:w-full transition-all duration-300" />
                 </Link>
               </li>
             ))}
           </ul>
-
-          {/* Language Switcher Desktop */}
           <LanguageSwitcher />
         </div>
 
         {/* Mobile Menu Button */}
         <div
-          className="md:hidden cursor-pointer text-gray-200"
-          onClick={() => setIsOpen(!isOpen)}
+          className="md:hidden cursor-pointer text-cyan-100"
+          onClick={() => setIsOpen((v) => !v)}
           role="button"
           aria-label={isOpen ? "Chiudi menu" : "Apri menu"}
           aria-expanded={isOpen}
         >
           {isOpen ? (
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-8 w-8"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M6 18L18 6M6 6l12 12"
-              />
+            <svg className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
             </svg>
           ) : (
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-8 w-8"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M4 6h16M4 12h16M4 18h16"
-              />
+            <svg className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
             </svg>
           )}
         </div>
       </div>
 
-      {/* Mobile Menu */}
-      {isOpen && (
-        <div className="md:hidden bg-gray-900/90 backdrop-blur-md py-4 text-center">
-          <ul className="space-y-4 text-lg text-gray-200">
-            {navLinks.map((link, index) => (
-              <li
-                key={index}
-                className="cursor-pointer hover:text-cyan-400 transition-colors"
-              >
-                <Link
-                  to={link.to}
-                  smooth={true}
-                  duration={500}
-                  offset={-60}
-                  spy={true}
-                  activeClass="text-cyan-400 font-semibold bg-black/20 backdrop-blur-md"
-                  onClick={() => setIsOpen(false)}
-                >
-                  {link.name}
-                </Link>
-              </li>
-            ))}
-          </ul>
-
-          {/* Language Switcher Mobile */}
-          <div className="mt-4 flex justify-center">
-            <LanguageSwitcher />
-          </div>
-        </div>
-      )}
+      {/* Mobile Menu con animazione framer-motion */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ y: -32, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: -14, opacity: 0 }}
+            transition={{ duration: 0.28, ease: "easeInOut" }}
+            className="md:hidden bg-black/90 backdrop-blur-lg border-t border-cyan-400/10 py-8 text-center shadow-lg fixed left-0 top-14 w-full z-[51]"
+          >
+            <ul className="space-y-5 text-lg text-cyan-100">
+              {navLinks.map((link, idx) => (
+                <li key={idx}>
+                  <Link
+                    to={link.to}
+                    smooth={true}
+                    duration={500}
+                    offset={-58}
+                    spy={true}
+                    activeClass="!text-cyan-400 !font-bold"
+                    onClick={() => setIsOpen(false)}
+                    className="transition-colors block py-2 hover:text-cyan-300"
+                  >
+                    {link.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            <div className="mt-6 flex justify-center">
+              <LanguageSwitcher />
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   );
 }

@@ -9,7 +9,7 @@ import Footer from "./components/Footer.jsx";
 
 function App() {
   return (
-    <div className="bg-animated-gradient min-h-screen">
+    <div className="bg-animated-gradient min-h-screen bg-gradient-to-tr from-black via-cyan-950 to-cyan-900">
       <Navbar />
       <section id="home" className="flex items-center justify-center">
         <Header />

@@ -1,61 +1,76 @@
-// eslint-disable-next-line no-unused-vars
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
 import { PROJECTS } from "../data/projects";
-import { projectsContainer, projectItem } from "../animation/variants";
+import { FaDatabase } from "react-icons/fa";
 import { useLanguage } from "../context/LanguageContext";
-import { FaDatabase } from "react-icons/fa"; // fallback icona
+
+// Variants per container e item con stagger
+const container = {
+  hidden: {},
+  visible: {
+    transition: { staggerChildren: 0.14, delayChildren: 0.13 }
+  }
+};
+const appearUp = {
+  hidden: { opacity: 0, y: 40, scale: 0.94 },
+  visible: { opacity: 1, y: 0, scale: 1, transition: { type: "spring", stiffness: 90 } }
+};
 
 export default function Projects() {
   const { t } = useLanguage();
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, amount: 0.15 });
 
   return (
     <motion.section
       id="projects"
-      className="min-h-screen w-full flex flex-col items-center justify-center px-4 md:px-8"
-      variants={projectsContainer}
+      className="min-h-screen w-full flex flex-col items-center justify-center px-4 py-14 md:px-12"
+      ref={ref}
+      variants={container}
       initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.2 }}
+      animate={isInView ? "visible" : "hidden"}
     >
       {/* Titolo */}
       <motion.h2
-        variants={projectItem}
-        className="text-4xl md:text-5xl font-bold text-gray-200 mb-4"
+        variants={appearUp}
+        className="text-5xl md:text-6xl font-extrabold text-cyan-200 mb-6 drop-shadow"
       >
         {t.projectsTitle}
       </motion.h2>
 
-      {/* Descrizione breve */}
+      {/* Descrizione */}
       <motion.p
-        variants={projectItem}
-        className="text-gray-300 text-center max-w-2xl mb-10 text-lg"
+        variants={appearUp}
+        className="text-cyan-50/90 text-center max-w-2xl mb-10 text-lg md:text-xl font-medium"
       >
         {t.projectsDescription}
       </motion.p>
 
       {/* Griglia progetti */}
       <motion.ul
-        variants={projectsContainer}
-        className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 w-full max-w-7xl"
+        variants={container}
+        className="grid sm:grid-cols-2 lg:grid-cols-3 gap-10 w-full max-w-7xl"
       >
         {PROJECTS.map((proj) => {
           const localized = t.projectsComponent[proj.id];
           return (
             <motion.li
               key={proj.id}
-              variants={projectItem}
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.98 }}
+              variants={appearUp}
+              whileHover={{
+                scale: 1.07,
+                boxShadow: "0 0 38px 2px #27e3f7bb,0 6px 80px 0 #18daf784",
+                filter: "brightness(1.06)"
+              }}
+              whileTap={{ scale: 0.97 }}
               className="
                 group
-                bg-black/30 backdrop-blur-md
-                rounded-2xl
-                border border-cyan-400/20
-                hover:border-cyan-400/60
-                overflow-hidden
+                bg-black/25 backdrop-blur-xl
+                rounded-2xl overflow-hidden
+                border border-cyan-400/18
+                hover:border-cyan-400/70
                 transition-all duration-200
-                shadow-[0_0_0_rgba(0,0,0,0)]
-                hover:shadow-[0_0_20px_rgba(34,211,238,0.4)]
+                shadow-xl hover:shadow-cyan-400/30
               "
             >
               <a
@@ -72,19 +87,22 @@ export default function Projects() {
                     alt={localized.title}
                     className="w-full aspect-video object-cover"
                     loading="lazy"
+                    style={{
+                      borderBottom: "2px solid #11eaea55"
+                    }}
                   />
                 ) : (
-                  <div className="w-full aspect-video flex items-center justify-center bg-black/40 text-cyan-400 text-4xl">
+                  <div className="w-full aspect-video flex items-center justify-center bg-black/35 text-cyan-300 text-5xl">
                     <FaDatabase />
                   </div>
                 )}
 
                 {/* Corpo card */}
                 <div className="p-6 flex flex-col flex-1 text-left">
-                  <h3 className="text-xl font-semibold text-white mb-2 group-hover:text-cyan-300">
+                  <h3 className="text-2xl md:text-3xl font-semibold text-cyan-100 mb-3 group-hover:text-cyan-400 drop-shadow">
                     {localized.title}
                   </h3>
-                  <p className="text-gray-300 text-sm flex-1">
+                  <p className="text-cyan-50/90 text-base md:text-lg flex-1">
                     {localized.description}
                   </p>
                 </div>

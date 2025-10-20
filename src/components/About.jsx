@@ -1,51 +1,65 @@
-// eslint-disable-next-line no-unused-vars
-import { motion } from "framer-motion";
-import { sectionFromLeft, fadeUpChild } from "../animation/variants.js";
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import meditatingImg from "../assets/images/meditating.svg";
 import { useLanguage } from "../context/LanguageContext";
 
 export default function About() {
   const { t } = useLanguage();
+  const ref = useRef(null);
+
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "center center", "end start"] });
+
+  const leftX = useTransform(scrollYProgress, [0, 0.5, 1], [-250, 0, -250]);
+  const rightX = useTransform(scrollYProgress, [0, 0.5, 1], [250, 0, 250]);
+  const opacity = useTransform(scrollYProgress, [0, 0.5, 0.85], [0, 1, 0]);
 
   return (
-    <motion.section
+    <section
       id="about"
-      className="min-h-screen flex items-center justify-center px-4 md:px-8 relative"
-      variants={sectionFromLeft}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.2 }}
+      ref={ref}
+      className="min-h-screen flex items-center justify-between relative overflow-x-hidden"
     >
-      <div className="absolute inset-0 animated-bg pointer-events-none"></div>
-      <div className="flex flex-col md:flex-row items-center justify-center w-full gap-8">
-
-        {/* Colonna sinistra */}
+      {/* Sfondo decorativo */}
+      <div className="absolute inset-0 pointer-events-none z-0">
+        <svg className="absolute top-16 left-8 opacity-15" width="330" height="180">
+          <defs>
+            <linearGradient id="g2" x1="0" x2="1" y1="0" y2="1">
+              <stop offset="0%" stopColor="#00f0ea" />
+              <stop offset="100%" stopColor="#0e232d" />
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+      {/* WRAPPER CON overflow-x-hidden */}
+      <div className="flex flex-col md:flex-row items-center justify-center w-full gap-12 z-10 relative overflow-x-hidden">
+        {/* Colonna sinistra: si muove da sinistra verso il centro in sync con lo scroll */}
         <motion.div
-          variants={fadeUpChild}
-          className="w-full md:w-1/2 flex items-center justify-center p-6 h-auto"
+          style={{ x: leftX, opacity }}
+          className="w-full md:w-1/2 flex items-center justify-center p-8 h-auto"
         >
-          <img src={meditatingImg} alt="" />
+          <motion.img
+            src={meditatingImg}
+            alt=""
+            className="w-72 md:w-96"
+            initial={{ y: 0 }}
+            animate={{ y: [0, -18, 0, 16, 0] }}
+            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+            style={{ filter: "drop-shadow(0 5px 40px #27e3f7bb)" }}
+          />
         </motion.div>
-
-        {/* Colonna destra */}
+        {/* Colonna destra: si muove da destra verso il centro in sync con lo scroll */}
         <motion.div
-          variants={fadeUpChild}
-          className="w-full md:w-1/2 text-right text-gray-200 p-6 h-auto"
+          style={{ x: rightX, opacity }}
+          className="w-full md:w-1/2 text-left text-cyan-100 p-8 h-auto backdrop-blur-lg bg-black/10 rounded-2xl shadow-xl border-[1.5px] border-cyan-200/10"
         >
-          <motion.h2
-            variants={fadeUpChild}
-            className="text-4xl md:text-5xl font-bold mb-4"
-          >
+          <h2 className="text-5xl md:text-6xl font-extrabold mb-6 drop-shadow text-cyan-200">
             {t.aboutTitle}
-          </motion.h2>
-          <motion.p
-            variants={fadeUpChild}
-            className="text-lg md:text-xl leading-relaxed"
-          >
+          </h2>
+          <p className="text-xl md:text-2xl leading-relaxed font-medium text-cyan-100/80">
             {t.aboutDescription}
-          </motion.p>
+          </p>
         </motion.div>
       </div>
-    </motion.section>
+    </section>
   );
 }
