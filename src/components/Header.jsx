@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { Link } from "react-scroll";
 import { motion, useScroll, useTransform, useInView } from "framer-motion";
 import { useLanguage } from "../context/LanguageContext";
 import headerImg from "../assets/images/Io.png";
@@ -127,17 +128,21 @@ export default function Header() {
           >
             {t.teckDescription}
           </motion.p>
-          {/* CTA animata */}
-          <motion.a
-            href="#projects"
+          {/* animata */}
+          <Link
+            to="projects"
             style={{ y: ctaY }}
-            className="inline-block mt-4 px-7 py-3 bg-cyan-400/90 rounded-xl font-bold text-lg text-black shadow-lg shadow-cyan-300/25 transition-all duration-200 hover:bg-cyan-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-cyan-500"
+            className="inline-block mt-4 px-7 py-3 bg-cyan-400/90 rounded-xl font-bold text-lg text-black shadow-lg shadow-cyan-300/25 transition-all duration-200 hover:bg-cyan-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-cyan-500 cursor-pointer"
             initial={{ opacity: 0, scale: 0.86 }}
             animate={{ opacity: 1, scale: [0.86, 1.05, 1] }}
             transition={{ delay: 1, duration: 0.7, ease: "easeOut" }}
+            smooth={true}
+            duration={500}
+            offset={-70}
+            spy={true}
           >
             Scopri i miei lavori
-          </motion.a>
+          </Link>
         </motion.div>
         {/* Immagine con animazione e scroll-linked */}
         <motion.div
