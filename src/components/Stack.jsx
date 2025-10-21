@@ -26,7 +26,7 @@ export default function Stack() {
     <section
       id="stacks"
       ref={ref}
-      className="min-h-screen flex items-center justify-center px-6"
+      className="min-h-screen flex items-center justify-center md:px-5"
     >
       <div className="flex flex-col items-center md:flex-row w-full gap-12">
         {/* Colonna sinistra */}

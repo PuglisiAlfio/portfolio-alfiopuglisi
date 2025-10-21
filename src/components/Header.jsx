@@ -45,7 +45,7 @@ export default function Header() {
     <header
       ref={ref}
       role="banner"
-      className="relative h-screen w-full flex items-center justify-center overflow-hidden pt-8"
+      className="relative h-screen w-full flex items-center justify-center overflow-hidden mt-20"
     >
       {/* SEO Meta */}
       <title>
