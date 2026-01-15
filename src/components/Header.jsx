@@ -117,10 +117,11 @@ export default function Header() {
             variants={fadeLeft}
             className="mt-6 mb-5 text-[1.1rem] md:text-xl font-medium text-cyan-50/80 tracking-wide leading-tight"
           >
-            {t.header.paragraph}.
-            <p className="text-cyan-400/80">
-              {t.header.subparagraph}.
-            </p>
+            {t.header.paragraph}
+            <br />
+            <span className="text-cyan-400/80">
+              {t.header.subparagraph}
+            </span>
           </motion.p>
           <motion.p
             variants={fadeLeft}

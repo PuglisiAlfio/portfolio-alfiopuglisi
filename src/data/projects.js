@@ -2,6 +2,7 @@ import futuramaDexImg from "../assets/projects/futuramadex.png"
 import nextStopImg from "../assets/projects/next-stop.png"
 import tennisTrackerImg from "../assets/projects/tennis-tracker.png"
 import stockifyImg from "../assets/projects/Stockify-login.png"
+import cobolAgentImg from "../assets/projects/Cobol-agent.jpeg"
 
 export const PROJECTS = [
   {
@@ -29,14 +30,21 @@ export const PROJECTS = [
     id: "rubricaPython",
     title: "Rubrica in Python",
     description: "Applicazione backend per gestire una rubrica di contatti.",
-    image: null, // niente immagine
+    image: null,
     github: "https://github.com/PuglisiAlfio/rubrica_Python",
   },
   {
     id: "stockify",
-    title: "Stockify ciao",
+    title: "Stockify",
     description: "Applicazione per prenotazioni e gestione magazzino di materiali idraulici ed elettrici.",
     image: stockifyImg,
     github: "https://github.com/PuglisiAlfio/stockify",
+  },
+  {
+    id: "cobolAgent",
+    title: "COBOL Doc Agent",
+    description: "Sistema Multi-Agente per l’Analisi, il Censimento e la Documentazione di Applicazioni COBOL.",
+    image: cobolAgentImg,
+    github: "https://github.com/PuglisiAlfio/cobol-agentic-analyzer",
   },
 ];

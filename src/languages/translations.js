@@ -50,6 +50,10 @@ export const translations = {
         title: "Stockify",
         description: "Applicazione per prenotazioni e gestione magazzino di materiali idraulici ed elettrici.",
       },
+      cobolAgent: {
+        title: "COBOL Doc Agent",
+        description: "Sistema multi-agente per l’analisi, il censimento e la documentazione delle applicazioni COBOL.",
+      },
     },
     motto: "Creazione di soluzioni web moderne e performanti.",
     contact: "Contattami",
@@ -65,7 +69,7 @@ export const translations = {
     profession: "Fullstack Developer",
     switchLanguage: "IT",
     header: {
-      paragraph: "Innovation, design and development with passion",
+      paragraph: "Innovation, design and development with passion.",
       subparagraph: "I transform ideas into digital experiences.",
       button: "See my work"
     },
@@ -105,6 +109,10 @@ export const translations = {
       stockify: {
         title: "Stockify",
         description: "Application for booking and warehouse management of plumbing and electrical materials.",
+      },
+      cobolAgent: {
+        title: "COBOL Doc Agent",
+        description: "Multi-agent system for analyzing, inventorying, and documenting COBOL applications.",
       },
     },
     motto: "Creation of modern and high-performance web solutions.",
