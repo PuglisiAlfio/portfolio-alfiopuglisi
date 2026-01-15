@@ -8,6 +8,11 @@ export const translations = {
     projects: "Progetti",
     profession: "Sviluppatore Fullstack",
     switchLanguage: "EN",
+    header: {
+      paragraph: "Innovazione, design e sviluppo con passione.",
+      subparagraph: "Trasformo idee in esperienze digitali.",
+      button: "Scopri i miei lavori"
+    },
     title1: "Sviluppatore",
     title2: "Design Creativo",
     title3: "Qualità",
@@ -59,6 +64,11 @@ export const translations = {
     projects: "Projects",
     profession: "Fullstack Developer",
     switchLanguage: "IT",
+    header: {
+      paragraph: "Innovation, design and development with passion",
+      subparagraph: "I transform ideas into digital experiences.",
+      button: "See my work"
+    },
     title1: "Developer",
     title2: "Creative Design",
     title3: "Quality",

@@ -117,9 +117,9 @@ export default function Header() {
             variants={fadeLeft}
             className="mt-6 mb-5 text-[1.1rem] md:text-xl font-medium text-cyan-50/80 tracking-wide leading-tight"
           >
-            Innovazione, design e sviluppo con passione.
+            {t.header.paragraph}.
             <p className="text-cyan-400/80">
-              Trasformo idee in esperienze digitali.
+              {t.header.subparagraph}.
             </p>
           </motion.p>
           <motion.p
@@ -141,7 +141,7 @@ export default function Header() {
             offset={-70}
             spy={true}
           >
-            Scopri i miei lavori
+            {t.header.button}
           </Link>
         </motion.div>
         {/* Immagine con animazione e scroll-linked */}
