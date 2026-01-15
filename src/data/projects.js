@@ -4,6 +4,9 @@ import tennisTrackerImg from "../assets/projects/tennis-tracker.png"
 import stockifyImg from "../assets/projects/Stockify-login.png"
 import cobolAgentImg from "../assets/projects/Cobol-agent.jpeg"
 
+
+// title e description in questo file sono "inutili" in quanto la card prende le informazioni dal file translations.js
+
 export const PROJECTS = [
   {
     id: "futuramadex",
